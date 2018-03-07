@@ -1,0 +1,89 @@
+﻿@using Microsoft.EntityFrameworkCore
+@model SaleAndRentingPortalSql.Models.ProductViewModels.OrdreProductViewModel2
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OrdreProductViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal"></dl>
+</div>
+<div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Description)
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Products)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+
+    <div class="form-group">
+        <label asp-for="Ordre.Price" class="control-label"></label>
+        @{ var amount = "" + Model.Ordre.Price + " Dkk";}
+        @Html.DisplayFor(model => amount)
+    </div>
+    <div class="form-group">
+        <label asp-for="Ordre.OrderDate" class="control-label"></label>
+        @Html.DisplayFor(model => Model.Ordre.OrderDate)
+    </div>
+    <div class="form-group">
+        <label asp-for="Ordre.OrderTime" class="control-label"></label>
+        @Html.DisplayFor(model => Model.Ordre.OrderTime)
+    </div>
+    <div class="form-group">
+        <label asp-for="Ordre.KortholderNavn" class="control-label"></label>
+        @Html.DisplayFor(model => Model.Ordre.KortholderNavn)
+    </div>
+    <div class="form-group">
+        <label asp-for="Ordre.Address" class="control-label"></label>
+        @Html.DisplayFor(model => Model.Ordre.Address)
+    </div>
+    <div class="form-group">
+        <label asp-for="Ordre.Zipcode" class="control-label"></label>
+        @Html.DisplayFor(model => Model.Ordre.Zipcode)
+    </div>
+    <div class="form-group">
+        <label asp-for="Ordre.Email" class="control-label"></label>
+        @Html.DisplayFor(model => Model.Ordre.Email)
+
+    </div>
+    <div class="form-group">
+        <label asp-for="Ordre.Orderid" class="control-label"></label>
+        @Html.DisplayFor(model => Model.Ordre.Orderid)
+    </div>
+    <div class="form-group">
+        <label asp-for="Ordre.Status" class="control-label"></label>
+        @Html.DisplayFor(model => Model.Ordre.Status)
+    </div>
+</div>

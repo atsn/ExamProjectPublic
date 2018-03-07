@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>aspnet-SaleAndRentingPortalSql-46DC6D7C-F96C-4C59-9015-6411CAEF7014</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\ManageViewModels\EnableAuthenticatorViewModel.cs" />
+    <Compile Remove="Models\ManageViewModels\ExternalLoginsViewModel.cs" />
+    <Compile Remove="Models\ManageViewModels\GenerateRecoveryCodesViewModel.cs" />
+    <Compile Remove="Models\ManageViewModels\RemoveLoginViewModel.cs" />
+    <Compile Remove="Models\ManageViewModels\TwoFactorAuthenticationViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Manage\Disable2fa.cshtml" />
+    <Content Remove="Views\Manage\EnableAuthenticator.cshtml" />
+    <Content Remove="Views\Manage\ExternalLogins.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\AccountViewModels\LoginWith2faViewModel.cs" />
+    <Compile Remove="Models\AccountViewModels\LoginWithRecoveryCodeViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Account\ExternalLogin.cshtml" />
+    <Content Remove="Views\Account\LoginWith2fa.cshtml" />
+    <Content Remove="Views\Account\LoginWithRecoveryCode.cshtml" />
+    <Content Remove="Views\Manage\GenerateRecoveryCodes.cshtml" />
+    <Content Remove="Views\Manage\TwoFactorAuthentication.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="bootstrap" Version="3.3.7" />
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
+    <PackageReference Include="jQuery" Version="3.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Azure.Storage.DataMovement" Version="0.6.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Sendgrid" Version="9.9.0" />
+    <PackageReference Include="WindowsAzure.Storage" Version="8.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Scripts\LoadingOverlay.js" />
+  </ItemGroup>
+
+</Project>

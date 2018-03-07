@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Bekreftelse";
+}
+
+<h2>Dit køb er nu gennemført</h2>
+
+@section Scripts {
+    @await Html.PartialAsync("JqScripts")
+    <script>
+        $('document').ready(function () {
+            setCookie("Shoppingcart", null, 2);
+            $('.Items').text(0);
+
+        })
+
+
+    </script>
+}   

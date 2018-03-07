@@ -1,0 +1,193 @@
+﻿@model SaleAndRentingPortalSql.Models.ProductViewModels.Product
+@{
+    ViewData["Title"] = "Ændre";
+    var newFileName = "";
+    var imagePath = "";
+}
+<h2>Ændre</h2>
+<h4>@Html.DisplayFor(i => Model.Name)</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data" id="Edit-Submit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Pris i Kroner</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" style=" resize: none; line-height: 1"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NoOfItems" class="control-label"></label>
+                <input asp-for="NoOfItems" class="form-control" />
+                <span asp-validation-for="NoOfItems" class="text-danger"></span>
+            </div>
+
+
+            <h4>Specifikationer</h4>
+            <div class="form-group">
+                <label asp-for="Specs[Model.Specs.Count-1].Text" class="control-label"></label>
+                <input asp-for="Specs[Model.Specs.Count-1].Text" class="form-control" />
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Specs[Model.Specs.Count-1].Value" class="control-label"></label>
+                <input asp-for="Specs[Model.Specs.Count-1].Value" class="form-control" />
+                <span asp-validation-for="Specs" class="text-danger"></span>
+
+            </div>
+            <input type="submit" value="Tiføj Specifikation" onclick="$('.Status').val(2)" class="btn btn-default" />
+            <br />
+            <br />
+            <br />
+            @if (Model.Specs.Count > 1)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>  <label asp-for="Specs[Model.Specs.Count-1].Text"> </label> </th>
+                            <th colspan="2">  <label asp-for="Specs[Model.Specs.Count-1].Value"></label></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @for (int i = 0; i < Model.Specs.Count - 1; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => Model.Specs[i].Text)
+                                </td>
+                                <td> @Html.DisplayFor(model => Model.Specs[i].Value)</td>
+                                <td><a href="#" data-hiddenId="@Html.IdFor(m => m.Specs[i])" onclick="return false;" class ="Delete"><span class="glyphicon glyphicon-trash" style="color:#33ce38"></span></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+
+            <h4>Kategori</h4>
+
+            <div class="form-group">
+                <label class="control-label">Kategori</label>
+                <input asp-for="Categories[Model.Categories.Count-1]" class="form-control" />
+                <span asp-validation-for="Categories" class="text-danger"></span>
+
+                
+            </div>
+
+            <input type="submit" value="Tiføj Kategori" onclick="$('.Status').val(1)" class="btn btn-default" />
+
+            <br />
+
+            <br />
+            @if (Model.Categories.Count > 1)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="2"> <label>Kategori</label></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Categories.Count - 1; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => Model.Categories[i])
+                                </td>
+                                <td><a style="float:left" href="#" data-hiddenId="@Html.IdFor(m => m.Categories[i])" onclick="return false;" class="Delete"><span class="glyphicon glyphicon-trash" style="color:#33ce38"></span></a></td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+            <br />
+            <input asp-for="status" type="hidden" class="Status" />
+
+
+            <input asp-for="pictures[Model.pictures.Count-1].File" onchange="$('.Status').val(3); $('form#Edit-Submit').submit();" />
+            <input asp-for="pictures[Model.pictures.Count-1].Path" type="hidden" />
+            <span asp-validation-for="pictures" class="text-danger"></span>
+
+
+            <br />
+            @for (int i = 0; i < Model.pictures.Count - 1; i++)
+            {<div>
+                 <a href="@Model.pictures[i].Path" data-lightbox="@Model.pictures[i].Path" ><img src="@Model.pictures[i].Path" style="max-width: 100px; max-height: 100px" /></a>
+             </div>
+             <br/>
+               @Html.HiddenFor(model => Model.pictures[i].Path)
+                <input asp-for="pictures[i].File" type="hidden" />
+
+            }
+
+            @for (int i = 0; i < Model.Specs.Count - 1; i++)
+            {
+                <input asp-for="Specs[i].Text" type="hidden" />
+                <input asp-for="Specs[i].Value" type="hidden" />
+            }
+
+            @for (int i = 0; i < Model.Categories.Count; i++)
+            {
+                <input asp-for="Categories[i]" type="hidden" />
+            }
+            <br />
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Gem"  onclick="$('.Status').val(0)" class="btn btn-default" />
+            </div>
+<input asp-for="Id" type="hidden"/>
+            <input asp-for="Created" type="hidden" />
+        </form>
+
+    </div>
+</div>
+<div>
+    <a asp-action="Index"><span class="glyphicon glyphicon-arrow-left" style="color:#33ce38"></span></a>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("JqScripts")
+       <script src="~/Scripts/autosize.js"></script>
+    <script>
+        
+        $(document)
+            .ready(function() {
+                autosize($('textarea')); 
+                if (sessionStorage.scrollTop != "undefined") {
+                   
+                    $(window).scrollTop(sessionStorage.scrollTop);
+                }
+            });
+
+        $(window).scroll(function () {
+            sessionStorage.scrollTop = $(this).scrollTop();
+        });
+
+        $('a.Delete ').click(function() {
+            $(this).parent().parent().remove();    
+            
+            var id = $(this).data('hiddenid');                 
+
+            $("[id^='" + id + "']").val(null);    
+        });
+    </script>   
+
+
+    <script src="~/Scripts/lightbox.js"></script>
+
+}

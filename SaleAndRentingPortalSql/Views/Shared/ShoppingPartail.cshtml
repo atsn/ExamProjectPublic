@@ -1,0 +1,16 @@
+﻿@model SaleAndRentingPortalSql.Models.ProductViewModels.ShoppingCartModel
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="ShoppingCart" asp-action="Index">
+            <div class="form-group">
+               <span class="glyphicon glyphicon-shopping-cart"></span>
+                @Html.DisplayFor(m => Model.count)
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

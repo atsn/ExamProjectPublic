@@ -1,0 +1,77 @@
+﻿@model SaleAndRentingPortalSql.Models.ProductViewModels.Productsearchmodel
+@{
+    ViewData["Title"] = "Produkter";
+}
+
+<style>
+    form.Serch {
+        display: none !important;
+    }
+</style>
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        <text>
+    <a asp-action="Create">Opret nyt produkt</a>            
+        </text>
+    }
+</p>
+
+<form asp-controller="Products" asp-action="Index">
+
+    <input asp-for="searchString" class="form-control" placeholder="Søg efter vare">
+
+    <input asp-for="minprice" class="form-control" placeholder="Min Pris" />
+    <input asp-for="maxprice" class="form-control" placeholder="Max Pris" />
+    <div class="form-group">
+        <label class="col-md-4">Er på lager</label>
+        <input asp-for="isstock" class="mol-md-8" />
+    </div>
+        <input asp-for="searchString" type="hidden" />
+
+        <input type="submit" value="Anvend Filtre" />
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.products.FirstOrDefault().Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.products.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.products.FirstOrDefault().Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.products)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <text>
+                        <a asp-action="Edit" asp-route-Myid="@item.Id"><span class="glyphicon glyphicon-pencil" style="color:#33ce38"></span></a> |
+                        <a asp-action="Delete" asp-route-Myid="@item.Id"><span class="glyphicon glyphicon-trash" style="color:#33ce38"></span></a> |
+                        </text>
+                    }
+
+                    <a asp-action="Details" asp-route-Myid="@item.Id"><span class="glyphicon glyphicon-search" style="color:#33ce38"></span></a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

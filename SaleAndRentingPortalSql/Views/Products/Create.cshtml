@@ -1,0 +1,148 @@
+﻿@using SaleAndRentingPortalSql.Models.ProductViewModels
+@model SaleAndRentingPortalSql.Models.ProductViewModels.Product
+
+@{
+    ViewData["Title"] = "Opret ny vare";
+}
+
+<h2>Opret ny vare</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" id="Create-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Pris i Kroner</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" style=" resize: none; line-height: 1"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NoOfItems" class="control-label"></label>
+                <input asp-for="NoOfItems" class="form-control" />
+                <span asp-validation-for="NoOfItems" class="text-danger"></span>
+            </div>
+
+
+            <h4>Specifikationer</h4>
+            <div class="form-group">
+                <label asp-for="Specs[Model.Specs.Count-1].Text" class="control-label"></label>
+                <input asp-for="Specs[Model.Specs.Count-1].Text" class="form-control" />
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Specs[Model.Specs.Count-1].Value" class="control-label"></label>
+                <input asp-for="Specs[Model.Specs.Count-1].Value" class="form-control" />
+            </div>
+            <input type="submit" value="Tiføj Specifikation" onclick="$('.Status').val(2)" class="btn btn-default" CausesValidation="False" />
+            <br />
+            <br />
+            <br />
+            @if (Model.Specs.Count > 1)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>  <label asp-for="Specs[Model.Specs.Count-1].Text"></label></th>
+                            <th>  <label asp-for="Specs[Model.Specs.Count-1].Value"></label></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @for (int i = 0; i < Model.Specs.Count - 1; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => Model.Specs[i].Text)
+                                </td>
+                                <td> @Html.DisplayFor(model => Model.Specs[i].Value)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+
+            <h4>Ketegorier</h4>
+
+            <div class="form-group">
+                <label class="control-label">Ketegori</label>
+                <input asp-for="Categories[Model.Categories.Count-1]" class="form-control" />
+            </div>
+
+            <input type="submit" value="Tiføj Ketegori" onclick="$('.Status').val(1)" class="btn btn-default" CausesValidation="False" />
+
+            <br />
+
+            <br />
+            @if (Model.Categories.Count > 1)
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> <label>Ketegori</label></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Categories.Count - 1; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => Model.Categories[i])
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+
+            <div class="form-group">
+                <input type="submit" value="Opret" onclick="$('.Status').val(0)" class="btn btn-default" />
+            </div>
+            <br />
+            <input asp-for="status" type="hidden" class="Status" />
+
+            <br />
+
+            @for (int i = 0; i < Model.Specs.Count - 1; i++)
+            {
+                <input asp-for="Specs[i].Text" type="hidden" />
+                <input asp-for="Specs[i].Value" type="hidden" />
+            }
+
+            @for (int i = 0; i < Model.Categories.Count; i++)
+            {
+                <input asp-for="Categories[i]" type="hidden" />
+            }
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index"><span class="glyphicon glyphicon-arrow-left" style="color:#33ce38"></span></a>
+</div>
+
+@section Scripts {
+
+    @await Html.PartialAsync("JqScripts")
+    <script src="~/Scripts/autosize.js"></script>
+    <script>
+        
+                  autosize(this.$('textarea'));
+          </script>
+
+}

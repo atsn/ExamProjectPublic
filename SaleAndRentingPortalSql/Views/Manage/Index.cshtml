@@ -1,0 +1,107 @@
+﻿@model SaleAndRentingPortalSql.Models.ManageViewModels.IndexViewModel
+@{
+    ViewData["Title"] = "Profil";
+    ViewData.AddActivePage(ManageNavPages.Index);
+}
+
+<h4>@ViewData["Title"]</h4>
+@Html.Partial("_StatusMessage", Model.StatusMessage)
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                @if (Model.IsEmailConfirmed)
+                {
+                    <div class="input-group">
+                        <input asp-for="Email" class="form-control" />
+                        <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+                    </div>
+                }
+                else
+                {
+                    <input asp-for="Email" class="form-control" />
+                    <button asp-action="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                }
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ZipCode"></label>
+                <input asp-for="ZipCode" id="ZipCodeInput" class="form-control" />
+                <span asp-validation-for="ZipCode" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="City"></label>
+                <input asp-for="City" id="CityInput" class="form-control" readonly />
+                <span asp-validation-for="City" class="text-danger"></span>
+
+            </div>
+            <a  class="btn btn-default" asp-controller="Ordres" asp-action="index">Se Ordre</a>
+
+            <button type="submit" class="btn btn-default">Save</button>
+        </form>
+        <br />
+        <a asp-area="" class="btn btn-default" asp-controller="Manage" asp-action="ChangePassword">Skift Kodeord</a>
+
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("JqScripts")
+    <script>
+
+
+        $(function () {
+
+            $('#ZipCodeInput').focusout(function () {
+                $.LoadingOverlay('show');
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetCity", "Account")?zipCode=' + $('#ZipCodeInput').val(),
+                    success: function (data) {
+                        $.LoadingOverlay('hide');
+
+                        $("#CityInput").val(data);
+                    },
+                    error: function (data) {
+                        $.LoadingOverlay('hide');
+
+
+                    }
+
+                });
+
+
+            })
+        });
+
+    </script>
+}

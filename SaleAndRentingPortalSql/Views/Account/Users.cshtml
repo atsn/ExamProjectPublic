@@ -1,0 +1,95 @@
+﻿@model IEnumerable<SaleAndRentingPortalSql.Models.AccountViewModels.EditUserViewModel>
+@{
+    ViewData["Title"] = "Alle Brugere";
+}
+<h2>Brugere</h2>
+<p>
+</p>
+
+    <p>
+        Søg efter en person: <input type="text" name="SearchString">
+        <input type="submit" value="Søg" />
+    </p>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zipcode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsConfirmed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Zipcode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsConfirmed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @if (item.Isactive)
+                    {
+                        <text>
+                        <a asp-action="EditUser" asp-route-id="@item.Id"><span class="glyphicon glyphicon-pencil" style="color:#33ce38"></span></a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash" style="color:#33ce38"></span></a>
+                        </text>
+                    }
+                    else
+                    {
+                        <text>
+                        <a asp-action="ActivateUser" asp-route-id="@item.Id"><span class="glyphicon glyphicon-check" style="color:#33ce38"></span></a>
+                        </text>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.FirstOrDefault() != null && Model.FirstOrDefault().Isactive)
+{<text>
+    <a asp-action="Dusers">Vis deaktiverede brugere</a>
+    </text>
+}
+else
+{<text>
+    <a asp-action="users">Vis aktiverede brugere</a>
+    </text>
+}

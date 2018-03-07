@@ -1,0 +1,121 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Opret bruger";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" id="Register" method="post" onsubmit="PreSubmut()">
+            <h4>Opret ny bruger.</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ZipCode"></label>
+                <input asp-for="ZipCode" id="ZipCodeInput" class="form-control" />
+                <span asp-validation-for="ZipCode" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="City"></label>
+                <input asp-for="City" id="CityInput" readonly class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" id="CityInput" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+            </div>
+
+            <input asp-for="RecaptchaResponse" id="Response" type="hidden" />
+
+            <div class=" form-group">
+
+                <div class="g-recaptcha" data-sitekey="GoogleKey"></div>
+
+
+
+            </div>
+            <span asp-validation-for="RecaptchaResponse" class=" text-danger"></span>
+            <br />
+
+            <button type="submit" class="btn btn-default" id="submit">Opret bruger</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("JqScripts")
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+
+
+    <script>
+
+        $(function () {
+
+            $('#ZipCodeInput').focusout(function () {
+                $.LoadingOverlay('show');
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetCity", "Account")?zipCode=' + $('#ZipCodeInput').val(),
+                    success: function (data) {
+                    $.LoadingOverlay('hide');
+                        $("#CityInput").val(data);
+                    },
+                    error: function (data) {
+                        $.LoadingOverlay('hide');
+                    }
+
+                });
+
+
+            })
+        });
+
+
+        function PreSubmut() {
+
+            $('#Response').val(grecaptcha.getResponse())
+            console.log($('#Register').valid())
+        }
+
+        $.validator.setDefaults({ ignore: null });
+    </script>
+}

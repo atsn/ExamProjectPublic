@@ -1,0 +1,65 @@
+﻿@model SaleAndRentingPortalSql.Models.AccountViewModels.EditUserViewModel
+@{
+    ViewData["Title"] = "Deaktiver";
+}
+<h2>Deaktiver</h2>
+<h3>Er du sikker på at du vil deaktivere denne bruger?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsConfirmed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsConfirmed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Zipcode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zipcode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Deaktiver" class="btn btn-default" /> |
+        <a asp-action="Index"><span class="glyphicon glyphicon-arrow-left"></span></a>
+    </form>
+</div>

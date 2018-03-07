@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaleAndRentingPortalSql", "SaleAndRentingPortalSql\SaleAndRentingPortalSql.csproj", "{BE5C6B2E-C5BE-4B38-8745-83359C4BD819}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleHelper", "ConsoleHelper\ConsoleHelper.csproj", "{D40FA423-D339-4E9C-A934-CEE18B6C1D7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE5C6B2E-C5BE-4B38-8745-83359C4BD819}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE5C6B2E-C5BE-4B38-8745-83359C4BD819}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE5C6B2E-C5BE-4B38-8745-83359C4BD819}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE5C6B2E-C5BE-4B38-8745-83359C4BD819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D40FA423-D339-4E9C-A934-CEE18B6C1D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D40FA423-D339-4E9C-A934-CEE18B6C1D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D40FA423-D339-4E9C-A934-CEE18B6C1D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D40FA423-D339-4E9C-A934-CEE18B6C1D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {726CF1FA-7F01-40FD-81BD-5368CCBCC83A}
+	EndGlobalSection
+EndGlobal
